@@ -1,0 +1,192 @@
+#############################################################################
+# Makefile for Wii (based on the original Makefile from QUASI88 0.6.4)      #
+#############################################################################
+
+include $(DEVKITPPC)/wii_rules
+
+#ROMDIR = sd:/wii88/rom/
+#DISKDIR = sd:/wii88/disk/
+#TAPEDIR = sd:/wii88/tape/
+
+BINDIR = /usr/local/bin
+
+SUPPORT_DOUBLE = 1
+SUPPORT_UTF8 = 1
+
+USE_SOUND = 1 # with SDL
+USE_FMGEN = 1 # only works if USE_SOUND is set to 1
+
+USEINLINE = '-DINLINE=static __inline__'
+
+CC = powerpc-eabi-gcc
+CFLAGS = -O2
+CFLAGS += $(MACHDEP) -Dmain=SDL_main -I$(DEVKITPRO)/libogc/include/SDL
+CFLAGS += -fsigned-char
+CFLAGS += -fno-exceptions
+CFLAGS += -fomit-frame-pointer
+CFLAGS += -Wall
+
+CXX = powerpc-eabi-g++
+CXXFLAGS = $(CFLAGS)
+CXXLIBS = -L$(DEVKITPPC)/powerpc-eabi/lib -L$(DEVKITPRO)/libogc/lib/wii \
+		  -lSDL -lfat -lwiiuse -lwiikeyboard -lbte -logc -lm -lstdc++
+
+LD = $(CC) -Wl,-s $(MACHDEP) -Dmain=SDL_main
+
+CFLAGS += -Isrc
+
+CFLAGS += -DJOY_SDL -I$(DEVKITPRO)/libogc/include
+LIBS += -L$(DEVKITPPC)/powerpc-eabi/lib -L$(DEVKITPRO)/libogc/lib/wii -lSDL \
+		-lfat -lwiiuse -lwiikeyboard -lbte -logc -lm -lstdc++
+
+CFLAGS += -Isrc/FUNIX -Isrc/SDL -I$(DEVKITPRO)/libogc/include
+LIBS += -L$(DEVKITPPC)/powerpc-eabi/lib -L$(DEVKITPRO)/libogc/lib/wii -lSDL \
+		-lfat -lwiiuse -lwiikeyboard -lbte -logc -lm -lstdc++
+CFLAGS += -DQUASI88_SDL
+
+ifdef SUPPORT_DOUBLE
+CFLAGS += -DSUPPORT_DOUBLE
+endif
+
+ifdef SUPPORT_UTF8
+CFLAGS += -DSUPPORT_UTF8
+endif
+
+ifdef USE_SOUND
+
+SNDDRV_DIR = snddrv
+
+SD_Q88_DIR = $(SNDDRV_DIR)/quasi88
+SD_SDL_DIR = $(SNDDRV_DIR)/quasi88/SDL
+
+SRC_DIR = $(SNDDRV_DIR)/src
+SOUND_DIR = $(SNDDRV_DIR)/src/sound
+UNIX_DIR = $(SNDDRV_DIR)/src/unix
+SYSDEP_DIR = $(SNDDRV_DIR)/src/unix/sysdep
+DSP_DIR = $(SNDDRV_DIR)/src/unix/sysdep/dsp-drivers
+MIXER_DIR = $(SNDDRV_DIR)/src/unix/sysdep/mixer-drivers
+
+SOUND_OBJS_BASE	= $(SD_Q88_DIR)/mame-quasi88.o	\
+		  $(SD_Q88_DIR)/beepintf.o	\
+		  $(SD_Q88_DIR)/beep.o		\
+		  $(SRC_DIR)/driver.o		\
+		  $(SRC_DIR)/restrack.o		\
+		  $(SRC_DIR)/sound.o		\
+		  $(SRC_DIR)/sndintrf.o		\
+		  $(SRC_DIR)/streams.o		\
+		  $(SOUND_DIR)/flt_vol.o	\
+		  $(SOUND_DIR)/flt_rc.o		\
+		  $(SOUND_DIR)/wavwrite.o	\
+		  $(SOUND_DIR)/2203intf.o	\
+		  $(SOUND_DIR)/2608intf.o	\
+		  $(SOUND_DIR)/ay8910.o		\
+		  $(SOUND_DIR)/fm.o		\
+		  $(SOUND_DIR)/ymdeltat.o	\
+		  $(SOUND_DIR)/samples.o
+
+SOUND_OBJS_UNIX	= $(UNIX_DIR)/sound.o			\
+		  $(SYSDEP_DIR)/rc.o			\
+		  $(SYSDEP_DIR)/misc.o			\
+		  $(SYSDEP_DIR)/plugin_manager.o	\
+		  $(SYSDEP_DIR)/sysdep_dsp.o		\
+		  $(SYSDEP_DIR)/sysdep_mixer.o		\
+		  $(SYSDEP_DIR)/sysdep_sound_stream.o
+
+CFLAGS += -DUSE_SOUND
+
+SOUND_CFLAGS = -DPI=M_PI -I$(SRCDIR)/$(SNDDRV_DIR) \
+			   -I$(SRCDIR)/$(SD_Q88_DIR) -I$(SRCDIR)/$(SRC_DIR) \
+			   -I$(SRCDIR)/$(SOUND_DIR) -Wno-missing-declarations -Wno-unused
+
+SOUND_OBJS = $(SOUND_OBJS_BASE)		\
+		  $(SD_SDL_DIR)/audio.o		\
+		  $(SD_SDL_DIR)/sdl.o
+SOUND_CFLAG	+= -I$(SRCDIR)/$(SD_SDL_DIR) -DSYSDEP_DSP_SDL
+
+ifdef USE_FMGEN
+FMGEN_DIR = fmgen
+FMGEN_OBJ = $(SD_Q88_DIR)/2203fmgen.o	\
+		  $(SD_Q88_DIR)/2608fmgen.o	\
+		  $(FMGEN_DIR)/fmgen.o		\
+		  $(FMGEN_DIR)/fmtimer.o	\
+		  $(FMGEN_DIR)/opna.o		\
+		  $(FMGEN_DIR)/psg.o
+CFLAGS += -DUSE_FMGEN
+SOUND_CFLAGS += -I$(SRCDIR)/$(FMGEN_DIR)
+SOUND_OBJS += $(FMGEN_OBJ)
+SOUND_LIBS += $(CXXLIBS)
+endif
+
+endif # close USE_SOUND
+
+PROGRAM = quasi88.elf
+PROGRAM_DOL = $(basename $(PROGRAM)).dol
+OBJECT = SDL/graph.o SDL/wait.o SDL/event.o SDL/main.o FUNIX/file-op.o
+
+OBJECT += quasi88.o emu.o memory.o status.o getconf.o \
+	  pc88main.o crtcdmac.o soundbd.o pio.o screen.o intr.o \
+	  pc88sub.o fdc.o image.o monitor.o basic.o \
+	  menu.o menu-screen.o q8tk.o q8tk-glib.o suspend.o \
+	  keyboard.o romaji.o pause.o \
+	  z80.o z80-debug.o snapshot.o \
+	  screen-8bpp.o screen-16bpp.o screen-32bpp.o screen-snapshot.o wii.o \
+	  $(SOUND_OBJS)
+
+CFLAGS += -DROM_DIR='"$(ROMDIR)"' -DDISK_DIR='"$(DISKDIR)"' \
+	  -DTAPE_DIR='"$(TAPEDIR)"' $(USEINLINE) -DCLIB_DECL= 
+
+CXXFLAGS += $(CFLAGS)
+
+LIBS += $(SOUND_LIBS)
+
+SRCDIR = src
+
+OBJDIR = obj.sdl
+OBJDIRS = $(OBJDIR) $(OBJDIR)/SDL $(OBJDIR)/FUNIX
+
+OBJDIRS += $(addprefix $(OBJDIR)/, \
+           $(SNDDRV_DIR) $(FMGEN_DIR) \
+           $(SD_Q88_DIR) $(SD_SDL_DIR) \
+           $(SRC_DIR) $(SOUND_DIR) $(UNIX_DIR) \
+           $(SYSDEP_DIR) $(DSP_DIR) $(MIXER_DIR) )
+
+OBJECTS = $(addprefix $(OBJDIR)/, $(OBJECT) )
+
+all: $(OBJDIRS) $(PROGRAM) $(PROGRAM_DOL)
+
+$(OBJDIRS):
+		-mkdir $@
+
+$(PROGRAM):	$(OBJECTS)
+		$(LD) $(OBJECTS) $(LIBS) -o $(PROGRAM) 
+
+
+$(OBJDIR)/$(SNDDRV_DIR)/%.o: $(SRCDIR)/$(SNDDRV_DIR)/%.c
+		$(CC) $(CFLAGS) $(SOUND_CFLAGS) -o $@ -c $<
+
+$(OBJDIR)/$(SNDDRV_DIR)/%.o: $(SRCDIR)/$(SNDDRV_DIR)/%.m
+		$(CC) $(CFLAGS) $(SOUND_CFLAGS) -o $@ -c $<
+
+$(OBJDIR)/$(SNDDRV_DIR)/%.o: $(SRCDIR)/$(SNDDRV_DIR)/%.cpp
+		$(CXX) $(CXXFLAGS) $(SOUND_CFLAGS) -o $@ -c $<
+
+$(OBJDIR)/$(FMGEN_DIR)/%.o: $(SRCDIR)/$(FMGEN_DIR)/%.cpp
+		$(CXX) $(CXXFLAGS) $(SOUND_CFLAGS) -o $@ -c $<
+
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.m
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+		$(CXX) $(CXXFLAGS) -o $@ -c $<
+
+
+$(OBJDIR)/%.s: $(SRCDIR)/%.c
+		$(CC) $(CFLAGS) $(SOUND_CFLAGS) -o $@ -S $<
+
+
+clean:
+		rm -rf $(OBJDIR) $(PROGRAM) $(PROGRAM_DOL)

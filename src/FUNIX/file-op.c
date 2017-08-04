@@ -18,6 +18,9 @@
 #include "initval.h"
 #include "file-op.h"
 #include "menu.h"
+#ifdef GEKKO
+#include "wii.h"
+#endif
 
 
 /*****************************************************************************/
@@ -797,16 +800,23 @@ int	osd_file_config_init(void)
 
 	/* カレントワーキングディレクトリ名 (CWD) を取得する */
 
+#ifndef GEKKO
     if (getcwd(dir_cwd, OSD_MAX_FILENAME-1)) {
 	dir_cwd[ OSD_MAX_FILENAME-1 ] = '\0';
     } else {
 	fprintf(stderr, "error: can't get CWD\n");
 	strcpy(dir_cwd, "");
     }
+#else
+    strcpy(dir_cwd, wii.path);
+#endif
 
 
 	/* ホームディレクトリ $(HOME) を取得する */
 
+#ifdef GEKKO
+    setenv("HOME", wii.path, 1);
+#endif
     home = getenv("HOME");
 
     if (home    == NULL ||			/* 未定義とか絶対パスで	*/
@@ -818,9 +828,15 @@ int	osd_file_config_init(void)
 
 	/* $(HOME)/.quasi88/以下のディレクトリを作成 */
 
+#ifdef GEKKO
+#define	HOME_QUASI88		WII_BASE_PATH
+#define	HOME_QUASI88_RC		WII_BASE_PATH "rc"
+#define	HOME_QUASI88_STATE	WII_BASE_PATH "state"
+#else
 #define	HOME_QUASI88		"/.quasi88"
 #define	HOME_QUASI88_RC		"/.quasi88/rc"
 #define	HOME_QUASI88_STATE	"/.quasi88/state"
+#endif
 
 	s = malloc(strlen(home) + sizeof(HOME_QUASI88) + 1);
 	if (s) {
@@ -861,6 +877,7 @@ int	osd_file_config_init(void)
 
 	/* ROMディレクトリを設定する */
 
+#ifndef GEKKO
     s = getenv("QUASI88_ROM_DIR");		/* $(QUASI88_ROM_DIR)	*/
     if (s && strlen(s) < OSD_MAX_FILENAME) {
 	strcpy(dir_rom, s);
@@ -869,10 +886,14 @@ int	osd_file_config_init(void)
 	    strcpy(dir_rom, dir_cwd);
 	}
     }
+#else
+    sprintf(dir_rom, "%srom", wii.path);
+#endif
 
 
 	/* DISKディレクトリを設定する */
 
+#ifndef GEKKO
     s = getenv("QUASI88_DISK_DIR");		/* $(QUASI88_DISK_DIR) */
     if (s && strlen(s) < OSD_MAX_FILENAME) {
 	strcpy(dir_disk, s);
@@ -881,10 +902,14 @@ int	osd_file_config_init(void)
 	    strcpy(dir_disk, dir_cwd);
 	}
     }
+#else
+    sprintf(dir_disk, "%sdisk", wii.path);
+#endif
 
 
 	/* TAPEディレクトリを設定する */
 
+#ifndef GEKKO
     s = getenv("QUASI88_TAPE_DIR");		/* $(QUASI88_TAPE_DIR) */
     if (s && strlen(s) < OSD_MAX_FILENAME) {
 	strcpy(dir_tape, s);
@@ -893,20 +918,28 @@ int	osd_file_config_init(void)
 	    strcpy(dir_tape, dir_cwd);
 	}
     }
+#else
+    sprintf(dir_tape, "%stape", wii.path);
+#endif
 
 
 	/* SNAPディレクトリを設定する */
 
+#ifndef GEKKO
     s = getenv("QUASI88_SNAP_DIR");		/* $(QUASI88_SNAP_DIR) */
     if (s && strlen(s) < OSD_MAX_FILENAME) {
 	strcpy(dir_snap, s);
     } else {
 	strcpy(dir_snap, dir_cwd);
     }
+#else
+    sprintf(dir_snap, "%ssnap", wii.path);
+#endif
 
 
 	/* STATEディレクトリを設定する */
 
+#ifndef GEKKO
     s = getenv("QUASI88_STATE_DIR");		/* $(QUASI88_STATE_DIR) */
     if (s && strlen(s) < OSD_MAX_FILENAME) {
 	strcpy(dir_state, s);
@@ -917,6 +950,9 @@ int	osd_file_config_init(void)
 	    strcpy(dir_state, dir_cwd);
 	}
     }
+#else
+    sprintf(dir_state, "%sstate", wii.path);
+#endif
 
 
 	/* 全体設定ディレクトリを設定する */

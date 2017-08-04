@@ -7,6 +7,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL.h>
+#ifdef GEKKO
+#include "wii.h"
+#endif
 
 #include "quasi88.h"
 #include "device.h"
@@ -124,6 +127,9 @@ int	main(int argc, char *argv[])
     romaji_type = 1;			/* ローマ字変換の規則を MS-IME風に */
 #endif
 
+#ifdef GEKKO
+    wii_init();
+#endif
 
     if (config_init(argc, argv,		/* 環境初期化 & 引数処理 */
 		    sdl_options,
