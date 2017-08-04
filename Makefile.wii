@@ -119,7 +119,7 @@ endif
 
 endif # close USE_SOUND
 
-PROGRAM = quasi88.elf
+PROGRAM = wii.elf
 PROGRAM_DOL = $(basename $(PROGRAM)).dol
 OBJECT = SDL/graph.o SDL/wait.o SDL/event.o SDL/main.o FUNIX/file-op.o
 

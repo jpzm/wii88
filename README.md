@@ -1,4 +1,4 @@
-# quasi88
+# wii88
 
 This project is a fork from [QUASI88](https://www.eonet.ne.jp/~showtime/quasi88/) version 0.6.4, a NEC PC-8801 emulator by Showzoh Fukunaga.
 Specifically, the source [quasi88-0.6.4.tgz](https://www.eonet.ne.jp/~showtime/quasi88/release/quasi88-0.6.4.tgz) (md5sum '21d268aaa290471f60142fea49485010').
