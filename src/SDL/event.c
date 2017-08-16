@@ -23,6 +23,9 @@
 
 #include "intr.h"			/* test */
 #include "screen.h"			/* test */
+#ifdef GEKKO
+#include "wii.h"
+#endif
 
 	int	show_fps;		/* test */
 static	int	display_fps_init(void);	/* test */
@@ -777,6 +780,9 @@ void	event_update(void)
     SDLKey keysym;
     int    key88, x, y;
 
+#ifdef GEKKO
+    wii_input();
+#endif
 
     SDL_PumpEvents();		/* イベントを汲み上げる */
 

@@ -152,7 +152,10 @@ OBJDIRS += $(addprefix $(OBJDIR)/, \
 
 OBJECTS = $(addprefix $(OBJDIR)/, $(OBJECT) )
 
-all: $(OBJDIRS) $(PROGRAM) $(PROGRAM_DOL)
+all: $(OBJDIRS) $(PROGRAM) $(PROGRAM_DOL) pack
+
+pack:
+		cp $(PROGRAM_DOL) hbc/apps/wii88/boot.dol
 
 $(OBJDIRS):
 		-mkdir $@

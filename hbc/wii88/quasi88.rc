@@ -1,0 +1,64 @@
+-menucursor
+# The following settings are written by QUASI88 ver 0.6.4              # AUTO
+-v2                                                                    # AUTO
+-4mhz                                                                  # AUTO
+-sd                                                                    # AUTO
+-dipsw 14618                                                           # AUTO
+-baudrate 1200                                                         # AUTO
+-extram 0                                                              # AUTO
+-nojisho                                                               # AUTO
+-nomouse                                                               # AUTO
+-analog                                                                # AUTO
+-24k                                                                   # AUTO
+-nopcg                                                                 # AUTO
+-noserialmouse                                                         # AUTO
+-cpu 0                                                                 # AUTO
+-fdc_nowait                                                            # AUTO
+-clock 3.993600                                                        # AUTO
+-speed 100                                                             # AUTO
+-wait                                                                  # AUTO
+-boost 1                                                               # AUTO
+-cmt_intr                                                              # AUTO
+-cmt_speed 0                                                           # AUTO
+-nohsbasic                                                             # AUTO
+-mem_nowait                                                            # AUTO
+-noexchange                                                            # AUTO
+-frameskip 1                                                           # AUTO
+-autoskip                                                              # AUTO
+-full                                                                  # AUTO
+-window                                                                # AUTO
+-aspect 0.000000                                                       # AUTO
+-interp                                                                # AUTO
+-noskipline                                                            # AUTO
+-show_mouse                                                            # AUTO
+-ungrab_mouse                                                          # AUTO
+-status                                                                # AUTO
+-status_fg 0                                                           # AUTO
+-status_bg 14079702                                                    # AUTO
+-nostatusimage                                                         # AUTO
+-notenkey                                                              # AUTO
+-nonumlock                                                             # AUTO
+-nocursor                                                              # AUTO
+-nomousekey                                                            # AUTO
+-nojoykey                                                              # AUTO
+-romaji 0                                                              # AUTO
+-mousespeed 50                                                         # AUTO
+-bmp                                                                   # AUTO
+-noswapdrv                                                             # AUTO
+-sleep                                                                 # AUTO
+-nosaveconfig                                                          # AUTO
+-sound                                                                 # AUTO
+-audio                                                                 # AUTO
+-nofmgen                                                               # AUTO
+-fmvol 100                                                             # AUTO
+-psgvol 20                                                             # AUTO
+-beepvol 60                                                            # AUTO
+-rhythmvol 100                                                         # AUTO
+-adpcmvol 100                                                          # AUTO
+-fmgenvol 100                                                          # AUTO
+-samplevol 50                                                          # AUTO
+-samplefreq 44100                                                      # AUTO
+-nosamples                                                             # AUTO
+-sdlbufsize 2048                                                       # AUTO
+-noclose                                                               # AUTO
+# ------------------------------                                       # AUTO

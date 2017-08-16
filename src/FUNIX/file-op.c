@@ -829,14 +829,13 @@ int	osd_file_config_init(void)
 	/* $(HOME)/.quasi88/以下のディレクトリを作成 */
 
 #ifdef GEKKO
-#define	HOME_QUASI88		WII_BASE_PATH
-#define	HOME_QUASI88_RC		WII_BASE_PATH "rc"
-#define	HOME_QUASI88_STATE	WII_BASE_PATH "state"
+#define	HOME_QUASI88		WII_PATH
+#define	HOME_QUASI88_RC		WII_PATH "rc"
+#define	HOME_QUASI88_STATE	WII_PATH "state"
 #else
 #define	HOME_QUASI88		"/.quasi88"
 #define	HOME_QUASI88_RC		"/.quasi88/rc"
 #define	HOME_QUASI88_STATE	"/.quasi88/state"
-#endif
 
 	s = malloc(strlen(home) + sizeof(HOME_QUASI88) + 1);
 	if (s) {
@@ -870,6 +869,7 @@ int	osd_file_config_init(void)
 		free(s);
 	    }
 	}
+#endif
 
     }
 
@@ -957,22 +957,30 @@ int	osd_file_config_init(void)
 
 	/* 全体設定ディレクトリを設定する */
 
+#ifndef GEKKO
     s = g_cfg;
     if (s && strlen(s) < OSD_MAX_FILENAME) {
 	strcpy(dir_g_cfg, s);
     } else {
 	strcpy(dir_g_cfg, "");
     }
+#else
+    sprintf(dir_g_cfg, "%s", HOME_QUASI88);
+#endif
 
 
 	/* 個別設定ディレクトリを設定する */
 
+#ifndef GEKKO
     s = l_cfg;
     if (s && strlen(s) < OSD_MAX_FILENAME) {
 	strcpy(dir_l_cfg, s);
     } else {
 	strcpy(dir_l_cfg, "");
     }
+#else
+    sprintf(dir_l_cfg, "%s", HOME_QUASI88_RC);
+#endif
 
 
 
