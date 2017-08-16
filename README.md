@@ -20,7 +20,7 @@ In order to setup the port, you have to:
   + copy system roms files to sd:/wii88/rom directory.
   + copy game roms files to sd:/wii88/disk directory.
 
-The emulation performace is better with original NEC PC8801 roms, but you can also use the pseudo BIOS available on [here](http://www.retropc.net/cisc/m88/download.html).
+The emulation performace is better with original NEC PC8801 roms, but you can also use the pseudo BIOS available [here](http://www.retropc.net/cisc/m88/download.html).
 
 ## Usage
 
@@ -34,7 +34,7 @@ Finally, go to the RESET tab, select the according BASIC MODE for your game, and
 On release 0.1.0, the in game buttons are mapped to play Mario Bros. Special and Punch Ball Mario in both one and two players modes (arrows for horizontal moviment and 2 to jump).
 It is also possible to play Super Mario Bros. Special (arrows for moviment, B to run and 1 to jump).
 Other games should be playable with this map as well, but I did not tested it.
-In future releases I plan do add means to configure this mapping and support for Classic and GameCube controllers.
+For future releases, is planned do add means to configure this mapping, and also support for Classic and GameCube controllers.
 
 ## Build
 
