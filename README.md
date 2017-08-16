@@ -20,11 +20,28 @@ In order to setup the port, you have to:
   + copy system roms files to sd:/wii88/rom directory.
   + copy game roms files to sd:/wii88/disk directory.
 
-The emulation performace is better with original NEC PC8801 roms, but you can also use the pseudo BIOS available on [this](http://www.retropc.net/cisc/m88/download.html) site.
+The emulation performace is better with original NEC PC8801 roms, but you can also use the pseudo BIOS available on [here](http://www.retropc.net/cisc/m88/download.html).
+
+## Usage
+
+When pointed to the screen, it is possible to use the Wii Remote to control the emulator options.
+You can use the Wii Remote as a mouse cursor.
+To open the menu, press the Wii Remote plus button (mapped to F12 key).
+The Wii Remote minus button could be used to exit the menu (mapped to ESC key).
+To select a game image, go to the DISK tab, select the game disk file (.d88), and push the OK.
+Finally, go to the RESET tab, select the according BASIC MODE for your game, and push the RESET button.
+
+On release 0.1.0, the in game buttons are mapped to play Mario Bros. Special and Punch Ball Mario in both one and two players modes (arrows for horizontal moviment and 2 to jump).
+It is also possible to play Super Mario Bros. Special (arrows for moviment, B to run and 1 to jump).
+Other games should be playable with this map as well, but I did not tested it.
+In future releases I plan do add means to configure this mapping and support for Classic and GameCube controllers.
 
 ## Build
 
-To build the Wii port, please use the provided `Makefile.wii`. In the terminal, you may type `make -f Makefile.wii`. If everything proceed sucessfully, there will be a new `wii.dol` file. This file is also copied to `hbc/apps/wii88/boot.dol`.
+To build the Wii port, please use the provided `Makefile.wii`.
+In the terminal, you may type `make -f Makefile.wii`.
+If everything proceed sucessfully, there will be a new `wii.dol` file.
+This file is also copied to `hbc/apps/wii88/boot.dol`.
 
 ## Credits
 
