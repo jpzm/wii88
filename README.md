@@ -11,7 +11,7 @@ Please, check the [releases](https://github.com/jpzm/wii88/releases) page.
 
 ## Build
 
-To build the Wii port, please use the provided `Makefile.wii`. In the terminal, you may type `make -f Makefile.wii`. If everything proceed sucessfully, there will be a new `wii.dol` file. Also, this file is also copied to `hbc/apps/wii88` directory.
+To build the Wii port, please use the provided `Makefile.wii`. In the terminal, you may type `make -f Makefile.wii`. If everything proceed sucessfully, there will be a new `wii.dol` file. This file is also copied to `hbc/apps/wii88/boot.dol`.
 
 ## Credits
 
