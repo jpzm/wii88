@@ -2,7 +2,7 @@
 <app version="1">
   <name>Wii88 (QUASI88 port for Wii)</name>
   <coder>S. Fukunaga, J. Medeiros</coder>
-  <version>0.6.4 (0.1 for Wii)</version>
+  <version>0.6.4 (0.1.0 for Wii)</version>
   <release_date>20170815</release_date>
   <arguments>
     <arg>-menucursor</arg>
