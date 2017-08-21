@@ -782,8 +782,9 @@ void	event_update(void)
 
 #ifdef GEKKO
     wii_input();
-#endif
 
+    while (SDL_PollEvent(&E)) {
+#else
     SDL_PumpEvents();		/* イベントを汲み上げる */
 
     while (SDL_PeepEvents(&E, 1, SDL_GETEVENT,
@@ -799,6 +800,7 @@ void	event_update(void)
 			  SDL_EVENTMASK(SDL_ACTIVEEVENT)    |
 			  SDL_EVENTMASK(SDL_USEREVENT)      |
 			  SDL_EVENTMASK(SDL_QUIT))) {
+#endif
 
 	switch (E.type) {
 
