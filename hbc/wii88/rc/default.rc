@@ -1,0 +1,41 @@
+# Map Controller(s) buttons to NEC PC8801 keys
+#
+# Lines starting with '#' are considered comments, and will be ignored.
+# Each non comment line must have the syntax:
+#   <joystick-type> <joystick-number> <joystick-key> <keyboard-key-number>
+# The <keyboard-key-number> should be that described on the enum defined in
+# file `keyboard.h'.
+# For example, the line "wpad 1 button_2 32" will produce a mapping for the
+# button '2' for the Wii Remote '1' to the key KEY88_SPACE (defined as '32'
+# in 'keyboard.h').
+# The possible joystick types are:
+#   - wpad: Wii Remote
+#   - wpad_nunchuk: Nunchuk (not supported yet)
+#   - wpad_classic: Classic controller (not supported yet)
+#   - pad: GameCube controller (not supported yet)
+
+# First Wii Remote (wpad 1)
+wpad 1 button_2 32         # KEY88_SPACE
+wpad 1 button_1 90         # KEY88_Z
+wpad 1 button_b 88         # KEY88_X
+wpad 1 button_a 65         # KEY88_A
+wpad 1 button_minus 156    # KEY88_ESC
+#wpad 1 button_home        # reserved, should not be used, it will be ignored
+wapd 1 button_plus 171     # KEY88_F12
+wpad 1 button_left 130     # KEY88_KP_2
+wpad 1 button_right 136    # KEY88_KP_8
+wpad 1 button_down 134     # KEY88_KP_6
+wpad 1 button_up 132       # KEY88_KP_4
+
+# Second Wii Remote (wpad 2)
+wpad 2 button_2 157	       # KEY88_TAB
+#wpad 2 button_1           # 
+#wpad 2 button_b           # 
+#wpad 2 button_a           # 
+wpad 2 button_minus 156    # KEY88_ESC
+#wpad 2 button_home        # reserved, should not be used, it will be ignored
+wpad 2 button_plus 171     # KEY88_F12
+#wpad 2 button_left        # 
+#wpad 2 button_right       # 
+wpad 2 button_down 71      # KEY88_G
+wpad 2 button_up 68        # KEY88_D

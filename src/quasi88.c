@@ -984,6 +984,9 @@ int	quasi88_disk_insert(int drv, const char *filename, int image, int ro)
 		filename_init_snap(TRUE);
 		filename_init_wav(TRUE);
 	    }
+#ifdef GEKKO
+            wii_disk_insert(filename);
+#endif
 	}
     }
 

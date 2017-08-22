@@ -4,6 +4,8 @@
 #include <string.h>
 
 #include <fat.h>
+#include <libgen.h>
+#include <unistd.h>
 #include <sys/dir.h>
 #include <sdcard/wiisd_io.h>
 #include <wiiuse/wpad.h>
@@ -13,15 +15,18 @@
 #include "event.h"
 
 #define WII_PATH                "sd:/wii88/"
+#define WII_PATH_RC             WII_PATH "rc/"
+#define WII_PATH_RC_DEFAULT     WII_PATH_RC "default.rc"
 #define WII_PATH_MAX_SIZE       260
 #define WII_WPAD_N              2     // number of WPAD controllers supported
 #define WII_WPAD_BUTTONS        11    // number of buttons on WPAD
 #define WII_WPAD_ACTIVE         1
 #define WII_WPAD_INACTIVE       0
 
-extern u16 wpad_button_map[WII_WPAD_BUTTONS];
+extern u16 wii_wpad_map[WII_WPAD_BUTTONS];
+extern char *wii_wpad_str[WII_WPAD_BUTTONS];
 
-enum wii_wpad_enum
+enum wii_wpad_enum // associated with
 { WII_WPAD_2,
   WII_WPAD_1,
   WII_WPAD_B,
@@ -66,6 +71,12 @@ extern struct wii_data
 void wii_init(void);
 
 void wii_input(void);
+
+void wii_apply_rc_string(char *config);
+
+void wii_read_conf_file(const char *filepath);
+
+void wii_disk_insert(const char *filename);
 
 void wii_read_wpad(u8 index);
 
