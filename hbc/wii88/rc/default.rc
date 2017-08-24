@@ -28,7 +28,7 @@ wpad 1 button_down 134     # KEY88_KP_6
 wpad 1 button_up 132       # KEY88_KP_4
 
 # Second Wii Remote (wpad 2)
-wpad 2 button_2 157	       # KEY88_TAB
+wpad 2 button_2 157        # KEY88_TAB
 #wpad 2 button_1           # 
 #wpad 2 button_b           # 
 #wpad 2 button_a           # 

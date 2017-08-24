@@ -1,0 +1,4 @@
+In the `rom' directory must be placed the system roms files.
+Game images should be placed in the `disk' directory.
+Custom key mappings may be placed in `rc' directory.
+In the `quasi88.rc' file is stored the emulator configurations.

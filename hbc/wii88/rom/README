@@ -1,0 +1,15 @@
+Place in this folder system roms files for NEC PC8801.
+The required rom files are listed below.
+
+  - disk.rom (Disk subsystem ROM)
+  - kanji1.rom (First level Chinese character ROM)
+  - kanji2.rom (Second level Chinese character ROM)
+  - n80.rom (N-BASIC ROM)
+  - n88.rom (N88-BASIC ROM)
+  - n88_0.rom (N88-BASIC 4th ROM, Bank 0)
+  - n88_1.rom (N88-BASIC 4th ROM, Bank 1)
+  - n88_2.rom (N88-BASIC 4th ROM, Bank 2)
+  - n88_3.rom (N88-BASIC 4th ROM, Bank 3)
+
+The files `kanji1.rom' and `kanji2.rom' are optional.
+If they exist, the language of the emulator is Japanese, otherwise English.

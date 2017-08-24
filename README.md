@@ -31,10 +31,10 @@ The Wii Remote minus button could be used to exit the menu (mapped to ESC key).
 To select a game image, go to the DISK tab, select the game disk file (.d88), and push the OK.
 Finally, go to the RESET tab, select the according BASIC MODE for your game, and push the RESET button.
 
-On release 0.1.0, the in game buttons are mapped to play Mario Bros. Special and Punch Ball Mario in both one and two players modes (arrows for horizontal moviment and 2 to jump).
-It is also possible to play Super Mario Bros. Special (arrows for moviment, B to run and 1 to jump).
-Other games should be playable with this map as well, but I did not tested it.
-For future releases, is planned do add means to configure this mapping, and also support for Classic and GameCube controllers.
+On release 0.1.1, it is possible to change button mappings and/or create independent mappings for each game image.
+See 'hbc/wii88/rc/default.rc' for guidance.
+For example, if there is a image file named 'Game.d88' in 'disk' directory and a mapping file named 'Game.d88.rc' in the 'rc' directory, the custom key mappings are loaded from 'Game.d88.rc'.
+Otherwise, the mapping from 'default.rc' file is used.
 
 ## Build
 
