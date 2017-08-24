@@ -32,9 +32,9 @@ To select a game image, go to the DISK tab, select the game disk file (.d88), an
 Finally, go to the RESET tab, select the according BASIC MODE for your game, and push the RESET button.
 
 On release 0.1.1, it is possible to change button mappings and/or create independent mappings for each game image.
-See `hbc/wii88/rc/default.rc` for guidance.
+See [`hbc/wii88/rc/default.rc`](https://github.com/jpzm/wii88/blob/master/hbc/wii88/rc/default.rc) and [`src/keyboard.h`](https://github.com/jpzm/wii88/blob/master/src/keyboard.h#L172) for guidance.
 For example, if there is a image file named `Game.d88` in `disk` directory and a mapping file named `Game.d88.rc` in the `rc` directory, the custom key mappings are loaded from `Game.d88.rc`.
-Otherwise, the mapping from `default.rc`file is used.
+Otherwise, the mapping from `default.rc` file is used.
 
 ## Build
 
