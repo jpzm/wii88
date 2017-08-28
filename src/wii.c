@@ -95,7 +95,7 @@ void wii_apply_rc_string(char *config)
     sscanf(config, "%s %u %s %u", joytype, &number, option, &value);
 
     // support for at most WII_WPAD_N controllers
-    if (number < WII_WPAD_N)
+    if (0 < number && number <= WII_WPAD_N)
     {
         if (strcasecmp("WPAD", joytype) == 0)
         {
